@@ -34,6 +34,14 @@ public class ClassListController {
 		
 		return "classproject/register";
 	}
+	
+	@RequestMapping(value = "/create.do")
+	public String create(ModelMap model) throws Exception {
+		
+		return "classproject/main";
+	}
+	
+	
 
 
 }

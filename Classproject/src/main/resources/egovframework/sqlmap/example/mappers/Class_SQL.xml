@@ -1,63 +1,76 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="egovframework.example.sample.service.impl.SampleMapper">
+<mapper namespace="egovframework.example.classlist.service.impl.ClassMapper">
 
-	<resultMap id="sample" type="egovframework.example.sample.service.SampleVO">
+	<resultMap id="Class" type="egovframework.example.classlist.service.ClassVO">
 		<result property="id" column="id"/>
 		<result property="name" column="name"/>
-		<result property="description" column="description"/>
-		<result property="useYn" column="use_yn"/>
-		<result property="regUser" column="reg_user"/>
+		<result property="password" column="password"/>
+		<result property="yn" column="yn"/>
+		<result property="adress" column="adress"/>
+		<result property="email" column="email"/>
+		<result property="password2" column="password2"/>
+		<result property="phonenumber" column="phonenumber"/>
 	</resultMap>
 
-	<insert id="insertSample" parameterType="SampleVO">
+	<insert id="insertClass" parameterType="ClassVO">
 
-			INSERT INTO SAMPLE
+			INSERT INTO TB_USER
 				( ID
 				  , NAME
-				  , DESCRIPTION
-				  , USE_YN
-				  , REG_USER )
-			VALUES ( #{id}
-				  , #{name}
-				  , #{description}
-				  , #{useYn}
-				  , #{regUser} )
+				  , PASSWORD
+				  , YN
+				  , ADRESS
+				  , EMAIL
+				  , PASSWORD2
+				  , PHONENUMBER )
+			VALUES ( #{id, jdbcType=VARCHAR}
+				  , #{name, jdbcType=VARCHAR}
+				  , #{password, jdbcType=VARCHAR}
+				  , #{yn, jdbcType=VARCHAR}
+				  , #{adress, jdbcType=VARCHAR}
+				  , #{email, jdbcType=VARCHAR}
+				  , #{password2, jdbcType=VARCHAR}
+				  , #{phonenumber, jdbcType=VARCHAR} )
 
 	</insert>
 
-	<update id="updateSample">
+	<update id="updateClass">
 
-			UPDATE SAMPLE
-			SET ID=#{id}
-				, NAME=#{name}
-				, DESCRIPTION=#{description}
-				, USE_YN=#{useYn}
+			UPDATE TB_USER
+			SET ID=#{id, jdbcType=VARCHAR}
+				, NAME=#{name, jdbcType=VARCHAR}
+				, PASSWORD=#{description}
+				, YN=#{useYn}
+				, ADRESS=#{adress, jdbcType=VARCHAR}
+				, EMAIL=#{email, jdbcType=VARCHAR}
+				, PASSWORD2=#{yn, jdbcType=VARCHAR}
+				, PHONENUMBER=#{phonenumber, jdbcType=VARCHAR}
 				  WHERE ID=#{id}
 
 	</update>
 
-	<delete id="deleteSample">
+	<delete id="deleteClass">
 
-			DELETE FROM SAMPLE
+			DELETE FROM TB_USER
 			WHERE ID=#{id}
 
 	</delete>
 
-	<select id="selectSample" resultMap="sample">
+	<select id="selectClass" resultMap="Class">
 
 			SELECT
 				ID, NAME, DESCRIPTION, USE_YN, REG_USER
-			FROM SAMPLE
+			FROM TB_USER
 			WHERE ID=#{id}
 
 	</select>
 
-	<select id="selectSampleList" parameterType="searchVO" resultType="egovMap">
+	<select id="selectClassList" parameterType="searchVO" resultType="egovMap">
 
 			SELECT
 				ID, NAME, DESCRIPTION, USE_YN, REG_USER
-			FROM SAMPLE
+			FROM TB_USER
 			WHERE 1=1
 			<if test="searchKeyword != null and searchKeyword != ''">
 		        <choose>
@@ -73,10 +86,10 @@
 			LIMIT #{recordCountPerPage} OFFSET #{firstIndex}
 	</select>
 
-	<select id="selectSampleListTotCnt" parameterType="searchVO" resultType="int">
+	<select id="selectClassListTotCnt" parameterType="searchVO" resultType="int">
 
 			SELECT COUNT(*) totcnt
-			FROM SAMPLE
+			FROM TB_USER
 			WHERE 1=1
 			<if test="searchKeyword != null and searchKeyword != ''">
 		        <choose>
